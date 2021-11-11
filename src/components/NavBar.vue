@@ -1,31 +1,39 @@
 <template>
-  <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <div class="container">
-      <a class="navbar-brand" href="#">FestivalCloud</a>
-      <button
-        class="navbar-toggler"
-        type="button"
-        data-bs-toggle="collapse"
-        data-bs-target="#navbarNavAltMarkup"
-        aria-controls="navbarNavAltMarkup"
-        aria-expanded="false"
-        aria-label="Toggle navigation"
-      >
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-        <div class="navbar-nav">
-          <router-link class="nav-link" to="/">Home</router-link>
-        </div>
-      </div>
-    </div>
-  </nav>
+  <b-navbar toggleable="lg" type="light" variant="light">
+    <b-container>
+      <b-navbar-brand to="/">FestivalCloud</b-navbar-brand>
+      <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
+      <b-collapse id="nav-collapse" is-nav>
+        <b-navbar-nav>
+          <b-nav-item to="/">Home</b-nav-item>
+          <b-nav-item :to="{ name: 'festivals_index' }">Festivals</b-nav-item>
+        </b-navbar-nav>
+      </b-collapse>
+    </b-container>
+  </b-navbar>
 </template>
 
 <script>
-export default {
-  name: "NavBar"
-};
+  export default {
+    name: "NavBar"
+  };
 </script>
 
-<style></style>
+<style>
+    .navbar {
+        margin-bottom: 10px;
+        /* padding-left: 20px; */
+
+    }
+
+    b-nav-item-dropdown {
+        list-style-type: none;
+    }
+
+    .navbar-toggler {
+        border: 0px !important;
+    }
+
+    .navbar-toggler:focus {
+        box-shadow: none !important;
+    }</style>
