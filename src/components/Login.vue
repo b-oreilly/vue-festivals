@@ -1,7 +1,6 @@
 <template>
-  <b-col>
-    <h2>Welcome to the Cloud Festivals Website</h2>
-    <div v-if="!loggedIn">
+    <b-col>
+        <div v-if="!loggedIn">
             <b-form>
                 <b-form-group label="Email">
                     <b-form-input type="email" placeholder="Enter email address" v-model="form.email" />
@@ -13,21 +12,14 @@
             </b-form>
         </div>
         <p v-else>You are logged in :)</p>
-  </b-col>
+    </b-col>
 </template>
 
 <script>
-  //import Login from '@/components/Login.vue';
-
-  // export default {
-  //   name: "Home",
-  //   components: {
-  //     //Login
-  //   }
     import axios from 'axios';
 
     export default {
-        name: "Home",
+        name: "Login",
         components: {
 
         },
@@ -52,7 +44,7 @@
                     .then(response => {
                         console.log(response.data.token)
                         this.loggedIn = true
-                        this.$emit('login', response.data.token)
+                        this.$emit('login')
                     })
                     .catch(error => {
                         console.log(error)
@@ -60,5 +52,5 @@
                     })
             }
         }
-  }
+    };
 </script>

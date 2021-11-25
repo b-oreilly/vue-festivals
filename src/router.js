@@ -7,8 +7,7 @@ Vue.use(Router);
 export default new Router({
   mode: "history",
   base: process.env.BASE_URL,
-  routes: [
-    {
+  routes: [{
       path: "/",
       name: "home",
       component: Home
@@ -18,6 +17,16 @@ export default new Router({
       path: "/festivals",
       name: "festivals_index",
       component: () => import("./pages/festivals/Index.vue")
+    },
+    {
+      path: "/festivals/:id",
+      name: "festivals_show",
+      component: () => import("./pages/festivals/Show.vue")
+    },
+    {
+      path: "/festivals/create",
+      name: "festivals_create",
+      component: () => import("./pages/festivals/Create.vue")
     }
   ]
 });
