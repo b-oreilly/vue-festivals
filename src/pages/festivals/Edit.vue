@@ -1,6 +1,6 @@
 <template>
   <b-col>
-    <h2>Create Festival</h2>
+    <h2>Edit Festival</h2>
     <b-form-group label="Title" label-for="title-input">
       <b-form-input id="title-input" v-model="form.title" type="text" required></b-form-input>
     </b-form-group>
@@ -23,10 +23,9 @@
 </template>
 
 <script>
-  import axios from '@/config';
-
   let token = localStorage.getItem('token')
 
+  import axios from '@/config';
   export default {
     name: 'FestivalsCreate',
     data() {
@@ -40,19 +39,37 @@
         }
       }
     },
+    mounted() {
+      this.getData();
+    },
     methods: {
-      submitForm() {
-        axios.post(`/festivals`, {
-            title: this.form.title,
-            description: this.form.description,
-            city: this.form.city,
-            start_date: this.form.start_date,
-            end_date: this.form.end_date
-          }, {
+      getData() {
+        axios
+          .get(`/festivals/${this.$route.params.id}`, {
             headers: {
               "Authorization": `Bearer ${token}`
             }
           })
+          .then(response => {
+            console.log(response.data)
+            this.form.title = response.data.title
+            this.form.description = response.data.description
+            this.form.city = response.data.city
+            this.form.start_date = response.data.start_date
+            this.form.end_date = response.data.end_date
+          })
+          .catch(error => {
+            console.log(error)
+            // this.$emit('invalid-token')
+          })
+      },
+      submitForm() {
+        axios.put(`/festivals/${this.route.params.id}`,
+            this.form, {
+              headers: {
+                "Authorization": `Bearer ${token}`
+              }
+            })
           .then(response => {
             console.log(response.data)
             this.$router.push({
